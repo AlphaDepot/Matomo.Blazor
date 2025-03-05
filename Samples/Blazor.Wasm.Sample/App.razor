@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment Env
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@*In this case for testing purposes we do want development 
+in real production dont forget to add the ! to negate the stament*@
+@if (Env.IsDevelopment())
+{
+    <Matomo
+        ApiUrl="@ApiUrl"
+        SiteId="@SiteId"
+        UserIdFunc="() => UserId()"
+        CustomVariables="Variables"
+        CustomDimensions="Dimensions"
+    />
+}
+
+@code
+{
+    private string ApiUrl { get; set; } = "http://localhost:8080/";
+    private int SiteId  { get; set; } = 1;
+    
+    private CustomVariable[] Variables { get; set; } =
+    [
+        new(1, "User Name", "John Smith", VariableScope.Visit)
+    ];
+    
+    private CustomDimension[] Dimensions { get; set; } =
+    [
+        new(1, "Value for Dimension 1")
+    ];
+
+
+    private Task<string> UserId()
+    {
+        var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+        var guid = Guid.NewGuid().ToString();
+        return Task.FromResult($"{guid}-{timestamp}");
+    }
+    
+}
+
+

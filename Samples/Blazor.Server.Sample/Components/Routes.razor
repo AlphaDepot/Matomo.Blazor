@@ -1,0 +1,49 @@
+﻿@using Blazor.Server.Sample.Configuration
+@using Matomo.Blazor.Dimensions
+@using Matomo.Blazor.Variables
+@using Matomo.Blazor
+@using Microsoft.Extensions.Options
+@inject IWebHostEnvironment Env
+@inject IOptions<MatomoAnalyticsOptions> MatomoOptions
+
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)"/>
+        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+    </Found>
+</Router>
+
+@*In this case for testing purposes we do want development 
+in real production dont forget to add the ! to negate the stament*@
+@if (Env.IsDevelopment())
+{
+    <Matomo
+        ApiUrl="@MatomoOptions.Value.ApiUrl"
+        SiteId="@MatomoOptions.Value.SiteId"
+        UserIdFunc="() => UserId()"
+        CustomVariables="Variables"
+        CustomDimensions="Dimensions"
+    />
+}
+
+@code {
+    
+    private CustomVariable[] Variables { get; set; } =
+    [
+        new(1, "User Name", "John Smith", VariableScope.Visit)
+    ];
+    
+    private CustomDimension[] Dimensions { get; set; } =
+    [
+        new(1, "Value for Dimension 1")
+    ];
+    
+    private Task<string> UserId()
+    {
+        var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
+        var guid = Guid.NewGuid().ToString();
+        return Task.FromResult($"{guid}-{timestamp}");
+    }
+
+
+}
