@@ -5,6 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <Title>Matomo.Blazor</Title>
+        <Authors>lstsystems</Authors>
+        <PackageProjectUrl>https://github.com/AlphaDepot/Matomo.Blazor</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/AlphaDepot/Matomo.Blazor</RepositoryUrl>
+        <Description>Implements Matomo Analytics tracking code in Blazor</Description>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReadmeFile >ReadMe.md</PackageReadmeFile>
     </PropertyGroup>
 
 
@@ -19,5 +26,7 @@
 
     <ItemGroup>
         <Folder Remove="wwwroot" />
+        <None Include="..\ReadMe.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 </Project>
