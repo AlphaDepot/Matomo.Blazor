@@ -13,6 +13,7 @@
         <Description>Implements Matomo Analytics tracking code in Blazor</Description>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageReadmeFile >ReadMe.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
 
