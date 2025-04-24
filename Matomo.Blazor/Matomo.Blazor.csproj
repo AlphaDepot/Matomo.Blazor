@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <Title>Matomo.Blazor</Title>
+        <VersionPrefix>9.0.1</VersionPrefix>
         <Authors>lstsystems</Authors>
         <PackageProjectUrl>https://github.com/AlphaDepot/Matomo.Blazor</PackageProjectUrl>
         <RepositoryUrl>https://github.com/AlphaDepot/Matomo.Blazor</RepositoryUrl>
