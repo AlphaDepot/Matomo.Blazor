@@ -57,7 +57,25 @@ public partial class Matomo : IDisposable
         {
             var userId = await GetUserId();
             var url = NavigationManager.Uri;
-            await MatomoProvider.Initialize(JsRuntime, ApiUrl, SiteId, url, userId, CustomVariables, CustomDimensions);
+            
+            
+            try
+            {
+                await MatomoProvider.Initialize(JsRuntime, ApiUrl, SiteId, url, userId, CustomVariables,
+                    CustomDimensions);
+            }
+            catch (JSException jsException)
+            {
+                var message = jsException.Message.Contains("undefined", StringComparison.OrdinalIgnoreCase)
+                    ? "MatomoProvider JS object is undefined. Check your ApiUrl and ensure your Matomo instance is reachable."
+                    : "Matomo JSInterop error";
+                
+                Logger.LogError(jsException, message);
+            }
+            catch (Exception exception)
+            {
+                Logger.LogError(exception, "An error occurred while initializing the Matomo provider");
+            }
         }
         
         await base.OnAfterRenderAsync(firstRender);
