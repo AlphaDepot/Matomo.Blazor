@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <Title>Matomo.Blazor</Title>
-        <VersionPrefix>9.0.3</VersionPrefix>
+        <VersionPrefix>9.0.4</VersionPrefix>
         <Authors>lstsystems</Authors>
         <PackageProjectUrl>https://github.com/AlphaDepot/Matomo.Blazor</PackageProjectUrl>
         <RepositoryUrl>https://github.com/AlphaDepot/Matomo.Blazor</RepositoryUrl>
@@ -26,8 +26,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.7" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.8" />
     </ItemGroup>
 
     <ItemGroup>
